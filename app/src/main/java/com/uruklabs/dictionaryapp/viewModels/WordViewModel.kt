@@ -6,17 +6,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.uruklabs.dictionaryapp.helper.FirebaseHelper
 import com.uruklabs.dictionaryapp.models.uiModels.Word
-import com.uruklabs.dictionaryapp.utils.ListForNext
+
 import kotlinx.coroutines.launch
 
 class WordViewModel : ViewModel(), LifecycleObserver {
 
     val wordLiveData = MutableLiveData<Word>()
 
-
      private fun setWord(word: Word) {
         wordLiveData.value = word
-        ListForNext.listForNext.add(word.word)
     }
 
     fun getWord() = viewModelScope.launch {
