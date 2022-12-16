@@ -37,6 +37,8 @@ class RegisterFragment : Fragment() {
         }
 
         binding.btnLogin.setOnClickListener {
+            binding.progressBar.visibility = View.VISIBLE
+            binding.btnLogin.isEnabled = false
             registerUser()
         }
     }
@@ -47,19 +49,27 @@ class RegisterFragment : Fragment() {
 
         if (email.isEmpty() || password.isEmpty()) {
             Toast.makeText(requireContext(), getString(R.string.fill_all_fields_msg), Toast.LENGTH_SHORT).show()
+            binding.progressBar.visibility = View.GONE
+            binding.btnLogin.isEnabled = true
             return
         }
 
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
+                    binding.progressBar.visibility = View.GONE
+                    binding.btnLogin.isEnabled = true
                     Toast.makeText(requireContext(), getString(R.string.register_sucess_msg), Toast.LENGTH_SHORT).show()
                 } else {
+                    binding.progressBar.visibility = View.GONE
+                    binding.btnLogin.isEnabled = true
                     Toast.makeText(requireContext(), getString(R.string.register_failed_msg), Toast.LENGTH_SHORT).show()
                 }
             }
 
             .addOnFailureListener {
+                binding.progressBar.visibility = View.GONE
+                binding.btnLogin.isEnabled = true
                 Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
             }
 

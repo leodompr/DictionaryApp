@@ -18,7 +18,7 @@ import com.uruklabs.dictionaryapp.R
 import com.uruklabs.dictionaryapp.databinding.FragmentDetailsWordBinding
 import com.uruklabs.dictionaryapp.helper.FirebaseHelper
 import com.uruklabs.dictionaryapp.models.uiModels.Word
-
+import com.uruklabs.dictionaryapp.utils.ListForNext
 import com.uruklabs.dictionaryapp.viewModels.HistoryViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -29,7 +29,8 @@ class DetailsWordFragment : Fragment() {
     private val viewModel by viewModel<HistoryViewModel>()
     private var mediaPlayer: MediaPlayer? = null
     private lateinit var word: Word
-
+    private var error = false
+    private var valueNext = 1
     override fun onStart() {
         super.onStart()
         viewModel.getWord(args.word)
@@ -43,16 +44,20 @@ class DetailsWordFragment : Fragment() {
             mediaPlayer = null
             it?.let {
                 initViews(it)
+                error = false
                 word = it
             }
         }
 
         viewModel.error.observe(this) {
-            Toast.makeText(requireContext(), getString(R.string.error_word), Toast.LENGTH_SHORT).show()
-            Handler(Looper.myLooper()!!).postDelayed({
-                findNavController().popBackStack()
-            }, 1000)
-
+            error = true
+            binding.tvWord.visibility = View.VISIBLE
+            binding.tvWord.text = args.word
+            binding.tvMeaningValue.visibility = View.VISIBLE
+            binding.tvMeaning.visibility = View.VISIBLE
+            binding.tvPhonetic.visibility = View.GONE
+            binding.tvMeaningValue.text = getString(R.string.word_not_found)
+            binding.progressBar2.visibility = View.GONE
         }
 
     }
@@ -72,6 +77,31 @@ class DetailsWordFragment : Fragment() {
         binding.ivExit.setOnClickListener {
            findNavController().navigateUp()
         }
+
+        binding.btnNext.setOnClickListener {
+            val listAdapter = ListForNext.listForNext
+            val position = listAdapter.indexOf(word.word)
+            if (error) valueNext += 1 else valueNext = 1
+            if (position < listAdapter.size - 1) {
+                val word = listAdapter[position + valueNext]
+                viewModel.getWord(word)
+            } else {
+                Toast.makeText(requireContext(), getString(R.string.no_more_words), Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        binding.btnBack.setOnClickListener {
+            val listAdapter = ListForNext.listForNext
+            if (error) valueNext += 1 else valueNext = 1
+            val position = listAdapter.indexOf(word.word)
+            if (position > 0) {
+                val word = listAdapter[position - valueNext]
+                viewModel.getWord(word)
+            } else {
+                Toast.makeText(requireContext(), getString(R.string.no_more_words), Toast.LENGTH_SHORT).show()
+            }
+        }
+
 
     }
 
@@ -98,7 +128,11 @@ class DetailsWordFragment : Fragment() {
         binding.tvWord.visibility = View.VISIBLE
         binding.tvPhonetic.visibility = View.VISIBLE
         binding.tvMeaning.visibility = View.VISIBLE
+        binding.btnBack.visibility = View.VISIBLE
+        binding.btnNext.visibility = View.VISIBLE
         binding.progressBar2.visibility = View.GONE
+        binding.ivPlay.visibility = View.VISIBLE
+        binding.seekBar2.visibility = View.VISIBLE
         binding.tvMeaningValue.visibility = View.VISIBLE
         binding.tvWord.text = word.word
         binding.tvMeaningValue.text = word.definitions

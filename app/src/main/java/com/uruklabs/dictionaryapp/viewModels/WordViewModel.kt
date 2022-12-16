@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.uruklabs.dictionaryapp.helper.FirebaseHelper
 import com.uruklabs.dictionaryapp.models.uiModels.Word
+import com.uruklabs.dictionaryapp.utils.ListForNext
 
 import kotlinx.coroutines.launch
 
@@ -14,7 +15,8 @@ class WordViewModel : ViewModel(), LifecycleObserver {
     val wordLiveData = MutableLiveData<Word>()
 
      private fun setWord(word: Word) {
-        wordLiveData.value = word
+         wordLiveData.value = word
+         ListForNext.listForNext.add(word.word)
     }
 
     fun getWord() = viewModelScope.launch {
@@ -23,16 +25,15 @@ class WordViewModel : ViewModel(), LifecycleObserver {
             for (word in words) {
                 if (word != null){
                 val wordObject = Word(word.toString())
-                setWord(wordObject)
+                    if (!wordObject.word.contains(" ") && !wordObject.word.contains("-")){
+                        setWord(wordObject)
+                    }
             }
             }
         } .addOnFailureListener {
 
         }
-
     }
-
-
 
 
 }
