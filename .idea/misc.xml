@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/Leonardo/AndroidStudioProjects/DictionaryApp/app/src/main/res/drawable-v24/custom_switch.xml" value="0.3675" />
+        <entry key="..\:/Users/Leonardo/AndroidStudioProjects/DictionaryApp/app/src/main/res/drawable-v24/custom_switch_selected.xml" value="0.3675" />
+        <entry key="..\:/Users/Leonardo/AndroidStudioProjects/DictionaryApp/app/src/main/res/drawable-v24/custom_switch_thumb_selected.xml" value="0.196" />
+        <entry key="..\:/Users/Leonardo/AndroidStudioProjects/DictionaryApp/app/src/main/res/drawable/exit_button.xml" value="0.366" />
+        <entry key="..\:/Users/Leonardo/AndroidStudioProjects/DictionaryApp/app/src/main/res/drawable/ic_baseline_close_24.xml" value="0.367" />
+        <entry key="..\:/Users/Leonardo/AndroidStudioProjects/DictionaryApp/app/src/main/res/drawable/ic_baseline_star_24_red.xml" value="0.3675" />
+        <entry key="..\:/Users/Leonardo/AndroidStudioProjects/DictionaryApp/app/src/main/res/drawable/ic_baseline_star_outline_24.xml" value="0.367" />
+        <entry key="..\:/Users/Leonardo/AndroidStudioProjects/DictionaryApp/app/src/main/res/drawable/next_button.xml" value="0.366" />
+        <entry key="..\:/Users/Leonardo/AndroidStudioProjects/DictionaryApp/app/src/main/res/layout/activity_main.xml" value="0.42271662763466045" />
+        <entry key="..\:/Users/Leonardo/AndroidStudioProjects/DictionaryApp/app/src/main/res/layout/fragment_details_word.xml" value="0.5" />
+        <entry key="..\:/Users/Leonardo/AndroidStudioProjects/DictionaryApp/app/src/main/res/layout/fragment_favorites.xml" value="0.33" />
+        <entry key="..\:/Users/Leonardo/AndroidStudioProjects/DictionaryApp/app/src/main/res/layout/fragment_history.xml" value="0.4393939393939394" />
+        <entry key="..\:/Users/Leonardo/AndroidStudioProjects/DictionaryApp/app/src/main/res/layout/fragment_home.xml" value="0.54921875" />
+        <entry key="..\:/Users/Leonardo/AndroidStudioProjects/DictionaryApp/app/src/main/res/layout/fragment_login.xml" value="0.22113502935420742" />
+        <entry key="..\:/Users/Leonardo/AndroidStudioProjects/DictionaryApp/app/src/main/res/layout/fragment_register.xml" value="0.5" />
+        <entry key="..\:/Users/Leonardo/AndroidStudioProjects/DictionaryApp/app/src/main/res/layout/fragment_word_list.xml" value="0.25" />
+        <entry key="..\:/Users/Leonardo/AndroidStudioProjects/DictionaryApp/app/src/main/res/layout/item_word.xml" value="0.365625" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

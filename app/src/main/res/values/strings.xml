@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Dictionary App</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="estrela_bot_o_favorito">Estrela botão favorito</string>
+    <string name="x_para_sair">X para sair</string>
+    <string name="meanings">Meanings</string>
+    <string name="exit">Exit</string>
+    <string name="next">Next</string>
+    <string name="sign_in">Sign in</string>
+    <string name="welcome">Welcome!</string>
+    <string name="email_address">Email address</string>
+    <string name="password">Password</string>
+    <string name="new_user_sign_up">New member? <b>Sign Up</b></string>
+    <string name="create_an_account_here">Create an account here</string>
+    <string name="name">Name</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="previous">Previous</string>
+    <string name="error_word">Error searching word</string>
+    <string name="save_data">Save data</string>
+    <string name="you_don_t_have_any_favorite_words_yet">You don\'t have any favorite words yet</string>
+    <string name="you_can_start_by_adding_some_words_to_your_favorite_list">Browse the words and favorite your favorites!</string>
+    <string name="you_have_no_history_yet">You have no history yet</string>
+    <string name="browse_words_to_have_them_displayed_here">Browse words to have them displayed here!</string>
+</resources>
