@@ -18,7 +18,7 @@ import com.uruklabs.dictionaryapp.R
 import com.uruklabs.dictionaryapp.databinding.FragmentDetailsWordBinding
 import com.uruklabs.dictionaryapp.helper.FirebaseHelper
 import com.uruklabs.dictionaryapp.models.uiModels.Word
-import com.uruklabs.dictionaryapp.utils.ListForNext
+
 import com.uruklabs.dictionaryapp.viewModels.HistoryViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -50,7 +50,7 @@ class DetailsWordFragment : Fragment() {
         viewModel.error.observe(this) {
             Toast.makeText(requireContext(), getString(R.string.error_word), Toast.LENGTH_SHORT).show()
             Handler(Looper.myLooper()!!).postDelayed({
-                findNavController().navigateUp()
+                findNavController().popBackStack()
             }, 1000)
 
         }
@@ -72,29 +72,6 @@ class DetailsWordFragment : Fragment() {
         binding.ivExit.setOnClickListener {
            findNavController().navigateUp()
         }
-
-        binding.btnNext.setOnClickListener {
-            val listAdapter = ListForNext.listForNext
-            val position = listAdapter.indexOf(word.word)
-            if (position < listAdapter.size - 1) {
-                val word = listAdapter[position + 1]
-                viewModel.getWord(word)
-            } else {
-                Toast.makeText(requireContext(), getString(R.string.no_more_words), Toast.LENGTH_SHORT).show()
-            }
-        }
-
-        binding.btnBack.setOnClickListener {
-            val listAdapter = ListForNext.listForNext
-            val position = listAdapter.indexOf(word.word)
-            if (position > 0) {
-                val word = listAdapter[position - 1]
-                viewModel.getWord(word)
-            } else {
-                Toast.makeText(requireContext(), getString(R.string.no_more_words), Toast.LENGTH_SHORT).show()
-            }
-        }
-
 
     }
 
@@ -121,8 +98,6 @@ class DetailsWordFragment : Fragment() {
         binding.tvWord.visibility = View.VISIBLE
         binding.tvPhonetic.visibility = View.VISIBLE
         binding.tvMeaning.visibility = View.VISIBLE
-        binding.btnBack.visibility = View.VISIBLE
-        binding.btnNext.visibility = View.VISIBLE
         binding.progressBar2.visibility = View.GONE
         binding.tvMeaningValue.visibility = View.VISIBLE
         binding.tvWord.text = word.word
@@ -142,7 +117,6 @@ class DetailsWordFragment : Fragment() {
                 addToFavorite(word)
             }
         }
-
 
         word.audio?.let {
             if(it != ""){
