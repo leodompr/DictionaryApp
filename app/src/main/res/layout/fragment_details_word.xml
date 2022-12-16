@@ -122,24 +122,26 @@
 
     <ImageView
         android:id="@+id/ivPlay"
-        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="22dp"
         android:src="@drawable/ic_play"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="@+id/cardView"
-        app:layout_constraintTop_toBottomOf="@+id/cardView" />
+        app:layout_constraintTop_toBottomOf="@+id/cardView"
+        tools:visibility="visible" />
 
     <SeekBar
-        android:visibility="gone"
         android:id="@+id/seekBar2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/ivPlay"
         app:layout_constraintEnd_toEndOf="@+id/cardView"
         app:layout_constraintStart_toEndOf="@+id/ivPlay"
-        app:layout_constraintTop_toTopOf="@+id/ivPlay" />
+        app:layout_constraintTop_toTopOf="@+id/ivPlay"
+        tools:visibility="visible" />
 
     <TextView
         android:id="@+id/tvMeaning"
@@ -164,8 +166,7 @@
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="@+id/cardView"
         app:layout_constraintStart_toStartOf="@+id/tvMeaning"
-        app:layout_constraintTop_toBottomOf="@+id/tvMeaning"
-        tools:visibility="visible" />
+        app:layout_constraintTop_toBottomOf="@+id/tvMeaning" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnBack"
@@ -213,6 +214,16 @@
         app:layout_constraintBottom_toTopOf="@+id/btnBack"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_no_audio"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/no_audio_available"
+        app:layout_constraintEnd_toEndOf="@+id/seekBar2"
+        app:layout_constraintStart_toStartOf="@+id/ivPlay"
+        app:layout_constraintTop_toTopOf="@+id/seekBar2" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

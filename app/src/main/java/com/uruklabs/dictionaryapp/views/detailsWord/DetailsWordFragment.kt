@@ -154,15 +154,18 @@ class DetailsWordFragment : Fragment() {
 
         word.audio?.let {
             if(it != ""){
+                binding.tvNoAudio.visibility = View.INVISIBLE
                 binding.ivPlay.visibility = View.VISIBLE
                 binding.seekBar2.visibility = View.VISIBLE
                 mediaPlayer = MediaPlayer.create(requireContext(), it.toUri())
                 initSeekBar()
             } else {
+                binding.tvNoAudio.visibility = View.VISIBLE
                 binding.ivPlay.visibility = View.INVISIBLE
                 binding.seekBar2.visibility = View.INVISIBLE
             }
         } ?: run {
+            binding.tvNoAudio.visibility = View.VISIBLE
             binding.ivPlay.visibility = View.INVISIBLE
             binding.seekBar2.visibility = View.INVISIBLE
         }
