@@ -1,17 +1,18 @@
 package com.uruklabs.dictionaryapp.views.login
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.google.android.gms.tasks.OnFailureListener
 import com.google.firebase.auth.FirebaseAuth
+import com.uruklabs.dictionaryapp.R
 import com.uruklabs.dictionaryapp.databinding.FragmentLoginBinding
+
 
 
 class LoginFragment : Fragment() {
@@ -47,14 +48,14 @@ class LoginFragment : Fragment() {
 
         binding.switchCompat.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
-                val preferences = requireActivity().getSharedPreferences("credentials", 0)
+                val preferences = requireActivity().getSharedPreferences(KEY_PREFERENCS_CREDENTIALS, 0)
                 val editor = preferences.edit()
-                editor.putString("email", binding.edtEmail.text.toString())
-                editor.putString("password", binding.edtPassword.text.toString())
+                editor.putString(KEY_PREFERENCS_EMAIL, binding.edtEmail.text.toString())
+                editor.putString(KEY_PREFERENCS_PASSWORD, binding.edtPassword.text.toString())
                 editor.apply()
                 editor.commit()
             } else {
-                val preferences = requireActivity().getSharedPreferences("credentials", 0)
+                val preferences = requireActivity().getSharedPreferences(KEY_PREFERENCS_CREDENTIALS, 0)
                 val editor = preferences.edit()
                 editor.clear()
                 editor.commit()
@@ -66,9 +67,9 @@ class LoginFragment : Fragment() {
 
 
     private fun verifySaveCredentials(): Boolean {
-        val preferences = requireActivity().getSharedPreferences("credentials", 0)
-        val email = preferences.getString("email", "")
-        val password = preferences.getString("password", "")
+        val preferences = requireActivity().getSharedPreferences(KEY_PREFERENCS_CREDENTIALS, 0)
+        val email = preferences.getString(KEY_PREFERENCS_EMAIL, "")
+        val password = preferences.getString(KEY_PREFERENCS_PASSWORD, "")
         if (email.isNullOrEmpty() && password.isNullOrEmpty()) {
             return false
         } else {
@@ -91,8 +92,8 @@ class LoginFragment : Fragment() {
         val password = binding.edtPassword.text.toString()
 
         if (email.isEmpty() || password.isEmpty()) {
-            binding.edtEmail.error = "Email is required"
-            binding.edtPassword.error = "Password is required"
+            binding.edtEmail.error = getString(R.string.email_required)
+            binding.edtPassword.error = getString(R.string.passowrd_required)
             binding.progressBar.visibility = View.GONE
             binding.btnLogin.apply {
                 isEnabled = true
@@ -111,20 +112,25 @@ class LoginFragment : Fragment() {
                         isEnabled = true
                         isVisible = true
                     }
-                    Toast.makeText(requireContext(), "Login failed", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), getString(R.string.login_fail), Toast.LENGTH_SHORT).show()
                 }
                 }
 
-            .addOnFailureListener(OnFailureListener { e ->
+            .addOnFailureListener { e ->
                 binding.progressBar.visibility = View.GONE
                 binding.btnLogin.apply {
                     isEnabled = true
                     isVisible = true
                 }
                 Toast.makeText(requireContext(), e.localizedMessage, Toast.LENGTH_SHORT).show()
-            })
+            }
 
 
     }
 
+    companion object {
+        const val KEY_PREFERENCS_CREDENTIALS = "credentials"
+        const val KEY_PREFERENCS_EMAIL = "email"
+        const val KEY_PREFERENCS_PASSWORD = "password"
+    }
 }

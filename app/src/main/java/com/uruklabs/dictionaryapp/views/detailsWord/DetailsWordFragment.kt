@@ -3,17 +3,15 @@ package com.uruklabs.dictionaryapp.views.detailsWord
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
 import android.widget.Toast
-import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.uruklabs.dictionaryapp.R
@@ -22,8 +20,6 @@ import com.uruklabs.dictionaryapp.helper.FirebaseHelper
 import com.uruklabs.dictionaryapp.models.uiModels.Word
 import com.uruklabs.dictionaryapp.utils.ListForNext
 import com.uruklabs.dictionaryapp.viewModels.HistoryViewModel
-import com.uruklabs.dictionaryapp.views.adapters.ListWordsAdapter
-import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -53,8 +49,7 @@ class DetailsWordFragment : Fragment() {
 
         viewModel.error.observe(this) {
             Toast.makeText(requireContext(), getString(R.string.error_word), Toast.LENGTH_SHORT).show()
-            val word = args.word
-            Handler().postDelayed({
+            Handler(Looper.myLooper()!!).postDelayed({
                 findNavController().navigateUp()
             }, 1000)
 
@@ -85,7 +80,7 @@ class DetailsWordFragment : Fragment() {
                 val word = listAdapter[position + 1]
                 viewModel.getWord(word)
             } else {
-                Toast.makeText(requireContext(), "No more words", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.no_more_words), Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -96,7 +91,7 @@ class DetailsWordFragment : Fragment() {
                 val word = listAdapter[position - 1]
                 viewModel.getWord(word)
             } else {
-                Toast.makeText(requireContext(), "No more words", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.no_more_words), Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -105,7 +100,7 @@ class DetailsWordFragment : Fragment() {
 
     private fun initSeekBar(){
         binding.seekBar2.max = mediaPlayer?.duration ?: 0
-        val handler = android.os.Handler()
+        val handler = Handler(Looper.getMainLooper())
         handler.postDelayed(object : Runnable {
             override fun run() {
                 try {
@@ -113,7 +108,7 @@ class DetailsWordFragment : Fragment() {
                     handler.postDelayed(this, 0)
                 } catch (e: Exception) {
                     binding.seekBar2.progress = 0
-                    Toast.makeText(context, "No audio", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, getString(R.string.no_audio), Toast.LENGTH_SHORT).show()
                 }
             }
         }, 0)
@@ -142,7 +137,7 @@ class DetailsWordFragment : Fragment() {
 
         binding.ivFavorite.setOnClickListener {
             if (word.isFavorite){
-                deleteWordFavorite(word)
+                removeWordFavorite(word)
             } else {
                 addToFavorite(word)
             }
@@ -190,31 +185,31 @@ class DetailsWordFragment : Fragment() {
     }
 
     private fun addToFavorite(word: Word){
-        word.isFavorite = true
-        viewModel.insertWord(word)
         FirebaseHelper.getIdUser()
             ?.let { FirebaseHelper.getDatabase().child("favorites").child(it).child(word.word).setValue(word)
                 .addOnCompleteListener {
-                    Toast.makeText(context, "Added to favorites", Toast.LENGTH_SHORT).show()
+                    word.isFavorite = true
+                    viewModel.insertWord(word)
+                    Toast.makeText(context, getString(R.string.add_favorite_msg), Toast.LENGTH_SHORT).show()
                 }
                 .addOnFailureListener {
-                    Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, getString(R.string.erro_add_favorite_msg), Toast.LENGTH_SHORT).show()
                 }
             }
 
     }
 
 
-    fun deleteWordFavorite(word: Word) {
-        word.isFavorite = false
-        viewModel.insertWord(word)
+    private fun removeWordFavorite(word: Word) {
         FirebaseHelper.getIdUser()?.let {
             FirebaseHelper.getDatabase().child("favorites").child(it).child(word.word).removeValue()
                 .addOnCompleteListener {
-                    Toast.makeText(context, "Deleted from favorites", Toast.LENGTH_SHORT).show()
+                    word.isFavorite = false
+                    viewModel.insertWord(word)
+                    Toast.makeText(context, getString(R.string.remov_favorties_msg), Toast.LENGTH_SHORT).show()
                 }
                 .addOnFailureListener {
-                    Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, getString(R.string.erro_remov_favorites_msg), Toast.LENGTH_SHORT).show()
                 }
         }
 

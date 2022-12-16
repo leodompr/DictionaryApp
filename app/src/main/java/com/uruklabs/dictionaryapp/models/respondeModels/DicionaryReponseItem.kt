@@ -1,7 +1,5 @@
 package com.uruklabs.dictionaryapp.models.respondeModels
 
-import androidx.room.Entity
-
 
 
 data class DicionaryReponseItem(

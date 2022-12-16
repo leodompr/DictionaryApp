@@ -1,7 +1,9 @@
 package com.uruklabs.dictionaryapp.viewModels
 
-import android.util.Log
-import androidx.lifecycle.*
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.uruklabs.dictionaryapp.helper.FirebaseHelper
 import com.uruklabs.dictionaryapp.models.uiModels.Word
 import com.uruklabs.dictionaryapp.utils.ListForNext
@@ -12,7 +14,7 @@ class WordViewModel : ViewModel(), LifecycleObserver {
     val wordLiveData = MutableLiveData<Word>()
 
 
-    fun setWord(word: Word) {
+     private fun setWord(word: Word) {
         wordLiveData.value = word
         ListForNext.listForNext.add(word.word)
     }

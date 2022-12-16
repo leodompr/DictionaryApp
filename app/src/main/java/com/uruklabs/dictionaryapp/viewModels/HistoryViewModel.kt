@@ -1,12 +1,10 @@
 package com.uruklabs.dictionaryapp.viewModels
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.uruklabs.dictionaryapp.data.repositorys.WordsRepositorys
-
 import com.uruklabs.dictionaryapp.models.uiModels.Word
 import kotlinx.coroutines.launch
 
@@ -29,7 +27,6 @@ class HistoryViewModel(private val repository : WordsRepositorys) : ViewModel() 
     fun getWordAp(word : String) = viewModelScope.launch {
         try {
             val response = repository.getWordFromAPI(word)
-            Log.d("response", response.toString())
             val wordR = Word(word = response.first().word,
                 pronunciation = response.first().phonetics.first().text,
                 definitions = response.first().meanings.first().definitions.first().definition,
@@ -38,7 +35,6 @@ class HistoryViewModel(private val repository : WordsRepositorys) : ViewModel() 
 
         } catch (e: Exception) {
             error.value = e.message
-            Log.d("HistoryViewModel", "getWordApi: ${e.message}")
         }
 
     }

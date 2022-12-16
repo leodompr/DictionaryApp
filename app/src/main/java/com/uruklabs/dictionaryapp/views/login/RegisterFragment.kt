@@ -1,16 +1,14 @@
 package com.uruklabs.dictionaryapp.views.login
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.uruklabs.dictionaryapp.R
 import com.uruklabs.dictionaryapp.databinding.FragmentRegisterBinding
-import com.uruklabs.dictionaryapp.helper.FirebaseHelper
 
 
 class RegisterFragment : Fragment() {
@@ -48,25 +46,22 @@ class RegisterFragment : Fragment() {
         val password = binding.edtPassword.text.toString()
 
         if (email.isEmpty() || password.isEmpty()) {
-            Toast.makeText(requireContext(), "Please fill all fields", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), getString(R.string.fill_all_fields_msg), Toast.LENGTH_SHORT).show()
             return
         }
 
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
-                    Toast.makeText(requireContext(), "User registered successfully", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), getString(R.string.register_sucess_msg), Toast.LENGTH_SHORT).show()
                 } else {
-                    Toast.makeText(requireContext(), "Registration failed", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), getString(R.string.register_failed_msg), Toast.LENGTH_SHORT).show()
                 }
             }
 
             .addOnFailureListener {
                 Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
             }
-
-
-
 
     }
 

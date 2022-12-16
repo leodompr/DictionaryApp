@@ -1,11 +1,11 @@
 package com.uruklabs.dictionaryapp.views.home
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.uruklabs.dictionaryapp.R
 import com.uruklabs.dictionaryapp.databinding.FragmentHomeBinding
 import com.uruklabs.dictionaryapp.views.adapters.ViewPagerAdapter
@@ -13,11 +13,6 @@ import com.uruklabs.dictionaryapp.views.adapters.ViewPagerAdapter
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,9 +30,9 @@ class HomeFragment : Fragment() {
 
     private fun viewPagerAdapter() {
         val adapter = ViewPagerAdapter(childFragmentManager)
-        adapter.addFragment(WordListFragment(), "Words")
-        adapter.addFragment(HistoryFragment(), "History")
-        adapter.addFragment(FavoritesFragment(), "Favorites")
+        adapter.addFragment(WordListFragment(), getString(R.string.title_words))
+        adapter.addFragment(HistoryFragment(), getString(R.string.title_history))
+        adapter.addFragment(FavoritesFragment(), getString(R.string.title_favorites))
         binding.viewPager.adapter = adapter
         binding.tabLayout.setupWithViewPager(binding.viewPager)
     }

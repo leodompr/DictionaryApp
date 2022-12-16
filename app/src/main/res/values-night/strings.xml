@@ -20,4 +20,19 @@
     <string name="you_can_start_by_adding_some_words_to_your_favorite_list">Browse the words and favorite your favorites!</string>
     <string name="you_have_no_history_yet">You have no history yet</string>
     <string name="browse_words_to_have_them_displayed_here">Browse words to have them displayed here!</string>
+    <string name="no_more_words">No more words</string>
+    <string name="no_audio">No audio</string>
+    <string name="add_favorite_msg">Added to favorites</string>
+    <string name="erro_add_favorite_msg">Error adding to favorites</string>
+    <string name="remov_favorties_msg">Removed  from favorites</string>
+    <string name="erro_remov_favorites_msg">\"Error removing from favorites \"</string>
+    <string name="title_words">Words</string>
+    <string name="title_history">History</string>
+    <string name="title_favorites">Favorites</string>
+    <string name="email_required">Email is required</string>
+    <string name="passowrd_required">Password is required</string>
+    <string name="login_fail">Login failed</string>
+    <string name="fill_all_fields_msg">Please fill all fields</string>
+    <string name="register_sucess_msg">User registered successfully</string>
+    <string name="register_failed_msg">Registration failed</string>
 </resources>
