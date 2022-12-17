@@ -1,4 +1,5 @@
-# Dictionary App
+
+<h1 align = "center"> Dictionary App</h3>
 
 <h3 align = "center"> Aplicativo android desenvolvido em Kotlin</h3>
 
