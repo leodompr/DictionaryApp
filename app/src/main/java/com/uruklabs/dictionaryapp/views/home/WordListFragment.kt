@@ -1,11 +1,15 @@
 package com.uruklabs.dictionaryapp.views.home
 
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.uruklabs.dictionaryapp.R
 import com.uruklabs.dictionaryapp.databinding.FragmentWordListBinding
 import com.uruklabs.dictionaryapp.models.uiModels.Word
 import com.uruklabs.dictionaryapp.viewModels.WordViewModel
@@ -14,6 +18,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class WordListFragment : Fragment() {
+    private lateinit var dialog: Dialog
     private lateinit var binding: FragmentWordListBinding
     private val adapterRv = ListWordsAdapter{ word ->
         HomeFragmentDirections.actionHomeFragmentToDetailsWordFragment(word.word).also {
@@ -22,22 +27,24 @@ class WordListFragment : Fragment() {
 
     }
     private val listWords = mutableListOf<Word>()
-
     private val viewModel by viewModel<WordViewModel>()
 
     override fun onStart() {
         super.onStart()
-        if (listWords.isEmpty()) { viewModel.getWord()
-        binding.progressBarWordList.visibility = View.VISIBLE }
+        if (listWords.isEmpty()) {
+            viewModel.getWord()
+            openDialogSearching()
+        }
 
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        dialog = Dialog(requireContext())
         viewModel.wordLiveData.observe(this) {
             listWords.add(it)
             adapterRv.setWordsl(listWords)
-            binding.progressBarWordList.visibility = View.GONE
+            dialog.dismiss()
 
         }
     }
@@ -65,6 +72,13 @@ class WordListFragment : Fragment() {
         }
     }
 
+    private fun openDialogSearching(){
+        dialog.setContentView(R.layout.dialog_search_word)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        dialog.setCancelable(false)
+        dialog.show()
+    }
 
 
 
