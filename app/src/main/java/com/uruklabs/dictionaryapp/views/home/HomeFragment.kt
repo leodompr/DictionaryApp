@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.uruklabs.dictionaryapp.R
@@ -13,6 +14,14 @@ import com.uruklabs.dictionaryapp.views.adapters.ViewPagerAdapter
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        requireActivity().onBackPressedDispatcher.addCallback(this) {
+            requireActivity().finish()
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,6 +45,8 @@ class HomeFragment : Fragment() {
         binding.viewPager.adapter = adapter
         binding.tabLayout.setupWithViewPager(binding.viewPager)
     }
+
+
 
 
 }
