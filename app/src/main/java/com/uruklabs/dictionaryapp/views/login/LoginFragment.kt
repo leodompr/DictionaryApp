@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.google.firebase.auth.FirebaseAuth
 import com.uruklabs.dictionaryapp.R
 import com.uruklabs.dictionaryapp.databinding.FragmentLoginBinding
@@ -18,6 +19,7 @@ import com.uruklabs.dictionaryapp.databinding.FragmentLoginBinding
 class LoginFragment : Fragment() {
     private lateinit var binding: FragmentLoginBinding
     private lateinit var auth : FirebaseAuth
+    private val args by navArgs<LoginFragmentArgs>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,6 +65,14 @@ class LoginFragment : Fragment() {
         }
 
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (args.email != " " && args.passowrd != " ") {
+            binding.edtEmail.setText(args.email)
+            binding.edtPassword.setText(args.passowrd)
+        }
     }
 
 

@@ -125,7 +125,7 @@
                 android:drawableStart="@drawable/ic_lock"
                 android:drawablePadding="16dp"
                 android:hint="@string/password"
-                android:inputType="textEmailAddress"
+                android:inputType="textPassword"
                 android:padding="16dp"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
