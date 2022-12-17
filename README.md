@@ -45,6 +45,7 @@
 <h3> Desenvolvimento </h3>
 
 - Arquitetura MVVM.
+- Testes de UI com Espresso
 - Firebase Authentication para login e cadastro
 - Firebase Realtime Database para salvar e remover palavras dos favoritos
 - Injeção de Dependências com Koin.
