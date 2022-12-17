@@ -24,7 +24,7 @@ class HistoryViewModel(private val repository : WordsRepositorys) : ViewModel() 
 
     }
 
-    fun getWordAp(word : String) = viewModelScope.launch {
+    private fun getWordAp(word : String) = viewModelScope.launch {
         try {
             val response = repository.getWordFromAPI(word)
             val wordR = Word(word = response.first().word,

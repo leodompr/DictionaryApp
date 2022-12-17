@@ -51,8 +51,10 @@ class FavoritesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         initRecyclerView(listWords)
+        binding.btnExplore.setOnClickListener {
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentSelf())
+        }
 
 
     }
