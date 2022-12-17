@@ -58,6 +58,7 @@ class DetailsWordFragment : Fragment() {
             binding.tvPhonetic.visibility = View.GONE
             binding.tvMeaningValue.text = getString(R.string.word_not_found)
             binding.progressBar2.visibility = View.GONE
+            binding.ivFavorite.visibility = View.GONE
         }
 
     }
@@ -134,6 +135,7 @@ class DetailsWordFragment : Fragment() {
         binding.ivPlay.visibility = View.VISIBLE
         binding.seekBar2.visibility = View.VISIBLE
         binding.tvMeaningValue.visibility = View.VISIBLE
+        binding.ivFavorite.visibility = View.VISIBLE
         binding.tvWord.text = word.word
         binding.tvMeaningValue.text = word.definitions
         binding.tvPhonetic.text = word.pronunciation
