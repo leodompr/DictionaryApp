@@ -93,7 +93,10 @@ dependencies {
     implementation 'com.google.gms:google-services:4.3.14'
     implementation 'com.google.firebase:firebase-common-ktx:20.1.1'
     implementation 'com.google.firebase:firebase-core:21.1.0'
-    implementation 'com.google.firebase:firebase-analytics:18.0.0'
-    implementation 'com.google.firebase:firebase-dynamic-links:19.1.0'
+
+
+
+    //SplashScreen
+    implementation 'androidx.core:core-splashscreen:1.0.0'
 
 }
