@@ -58,7 +58,7 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/tv_sign_in"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
@@ -70,14 +70,14 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/tv_welcome_login"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="22dp"
                 android:text="@string/create_an_account_here"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView3" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_sign_in" />
 
 
             <com.google.android.material.textfield.TextInputEditText
@@ -95,7 +95,7 @@
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView4" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_welcome_login" />
 
 
             <com.google.android.material.textfield.TextInputEditText
